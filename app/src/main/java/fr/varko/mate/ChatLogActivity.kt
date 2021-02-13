@@ -8,13 +8,10 @@ import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
-import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_chat_log.*
-import kotlinx.android.synthetic.main.chat_from_row.view.*
-import kotlinx.android.synthetic.main.chat_to_row.view.*
+
 
 class ChatLogActivity : AppCompatActivity() {
     companion object{
@@ -107,31 +104,5 @@ class ChatLogActivity : AppCompatActivity() {
 
     }
 }
-class ChatMessage(val id:String,val text:String, val fromId:String, val toId:String, val timestamp: Long){
-    constructor() : this("","","","",-1)
-}
-class ChatFromItem(val text: String, val user: User ): Item<ViewHolder>(){
-    override fun bind(viewHolder: ViewHolder, position: Int) {
-        viewHolder.itemView.textview_from_row.text = text
-        val uri = user.profileImageUrl
-        val targetImageView = viewHolder.itemView.imageview_from
-        Picasso.get().load(uri).into(targetImageView )
-    }
 
-    override fun getLayout(): Int {
-         return R.layout.chat_from_row
-    }
-}
-class ChatToItem(val text: String, val user: User ): Item<ViewHolder>(){
-    override fun bind(viewHolder: ViewHolder, position: Int) {
-        viewHolder.itemView.textview_to_row.text = text
 
-        val uri = user.profileImageUrl
-        val targetImageView = viewHolder.itemView.imageview_to
-        Picasso.get().load(uri).into(targetImageView )
-    }
-
-    override fun getLayout(): Int {
-        return R.layout.chat_to_row
-    }
-}

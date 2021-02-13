@@ -99,7 +99,3 @@ class RegisterActivity : AppCompatActivity() {
             }
     }
 }
-@Parcelize
-class User (val uid: String, val username: String, val profileImageUrl: String): Parcelable{
-constructor() : this("","","")
-}
