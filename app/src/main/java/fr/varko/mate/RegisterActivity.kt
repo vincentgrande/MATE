@@ -94,7 +94,7 @@ class RegisterActivity : AppCompatActivity() {
         ref.setValue(user)
             .addOnSuccessListener {
                 Log.d("RegisterActivity", "We save successfully the user to Firebase Database")
-                val intent = Intent(this,LatestMessagesActivity::class.java)
+                val intent = Intent(this,GamesActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
             }
