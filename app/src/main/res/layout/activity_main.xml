@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#A8D470FF"
+    android:background="#701B6C"
     android:paddingHorizontal="0dp"
     tools:context=".RegisterActivity">
 
@@ -110,8 +110,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="72dp"
+        android:background="#FFFFFF"
         android:text="SELECT PHOTO"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -120,9 +121,9 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/select_photo_imageView"
-        app:civ_border_width="4dp"
         android:layout_width="150dp"
         android:layout_height="150dp"
+        app:civ_border_width="4dp"
         app:layout_constraintBottom_toBottomOf="@+id/select_photo"
         app:layout_constraintEnd_toEndOf="@+id/select_photo"
         app:layout_constraintHorizontal_bias="0.0"
