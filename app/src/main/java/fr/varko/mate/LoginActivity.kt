@@ -26,7 +26,7 @@ class LoginActivity : AppCompatActivity() {
                             val user = auth.currentUser
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("LoginActivity", "signInWithEmail:success")
-                            Toast.makeText(baseContext, "Connected successfully.", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(baseContext, getString(R.string.success), Toast.LENGTH_SHORT).show()
                             val intent = Intent(this,LatestMessagesActivity::class.java)
                             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                             startActivity(intent)

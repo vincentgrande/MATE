@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MATE</string>
+    <string name="success"> Connected successfully.</string>
+
 </resources>
