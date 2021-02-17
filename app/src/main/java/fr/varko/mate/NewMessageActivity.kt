@@ -33,6 +33,7 @@ class NewMessageActivity : AppCompatActivity() {
                     val user = it.getValue(User::class.java)
                     if (user != null){
                         if (user.uid != FirebaseAuth.getInstance().uid){
+                            Log.d("NewMessage",FirebaseAuth.getInstance().uid)
                             adapter.add(UserItem(user))
                         }
                     }

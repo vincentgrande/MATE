@@ -90,6 +90,7 @@ class RegisterActivity : AppCompatActivity() {
         val ref = FirebaseDatabase.getInstance().getReference(("/users/$uid"))
         Log.d("RegisterActivity","REF : $ref")
         val user = User(uid,username_input.text.toString(),profileImageUrl)
+        Log.d("RegisterActivity","USER : ${user.username} ${user.profileImageUrl}")
         ref.setValue(user)
             .addOnSuccessListener {
                 Log.d("RegisterActivity", "We save successfully the user to Firebase Database")
@@ -97,5 +98,8 @@ class RegisterActivity : AppCompatActivity() {
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
             }
+                .addOnFailureListener {
+                    Log.d("RegisterActivity", "Failed to save user : ${it.message}")
+                }
     }
 }
