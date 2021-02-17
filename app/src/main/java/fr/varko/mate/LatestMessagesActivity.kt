@@ -3,6 +3,7 @@ package fr.varko.mate
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -49,12 +50,19 @@ class LatestMessagesActivity : AppCompatActivity() {
     }
 
     val latestMessageMap = HashMap<String, ChatMessage>()
+    val messageList = ArrayList<ChatMessage>()
 
     private fun refreshRecyclerView(){
         adapter.clear()
+        messageList.clear()
         latestMessageMap.values.forEach{
-            adapter.add(LatestMessageRow(it))
+            messageList.add(it)
         }
+        val sortedList :List<ChatMessage> = messageList.sortedByDescending { chatMessage :ChatMessage -> chatMessage.timestamp }
+        sortedList.forEach{
+            adapter.add((LatestMessageRow(it)))
+        }
+
     }
 
     private fun listenForLatestMessages(){
