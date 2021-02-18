@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">MATE</string>
     <string name="success"> Connected successfully.</string>
+    <string name="noaccount">Not having an account ?</string>
+    <string name="connect">Let\'s MATE !</string>
+    <string name="slogan">slogan slogan slogan slogan.</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
 
 </resources>

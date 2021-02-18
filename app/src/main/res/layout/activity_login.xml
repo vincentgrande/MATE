@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#701B6C">
+    android:background="@color/purple_background">
 
 
     <EditText
@@ -12,17 +12,17 @@
         android:layout_width="354dp"
         android:layout_height="42dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="176dp"
+        android:layout_marginTop="280dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/rounded_edittext"
         android:backgroundTint="#FFFFFF"
         android:ems="10"
-        android:hint="Email"
         android:inputType="textEmailAddress"
         android:paddingLeft="20dp"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,16 +30,16 @@
         android:id="@+id/password_connect"
         android:layout_width="0dp"
         android:layout_height="42dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="60dp"
         android:background="@drawable/rounded_edittext"
         android:backgroundTint="#FFFFFF"
         android:ems="10"
-        android:hint="Password"
         android:inputType="textPassword"
         android:paddingLeft="20dp"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
         app:layout_constraintEnd_toEndOf="@+id/email_connect"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/email_connect"
         app:layout_constraintTop_toBottomOf="@+id/email_connect" />
 
@@ -47,9 +47,9 @@
         android:id="@+id/connect"
         android:layout_width="0dp"
         android:layout_height="42dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="60dp"
         android:background="@drawable/rounded_button"
-        android:text="Connect"
+        android:text="@string/connect"
         app:layout_constraintEnd_toEndOf="@+id/password_connect"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/password_connect"
@@ -59,13 +59,62 @@
         android:id="@+id/register_text_view"
         android:layout_width="0dp"
         android:layout_height="42dp"
-        android:layout_marginTop="16dp"
-        android:text="Not having an account ?"
+        android:layout_marginTop="28dp"
+        android:text="@string/noaccount"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/connect"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/connect"
         app:layout_constraintTop_toBottomOf="@+id/connect" />
+
+    <TextView
+        android:id="@+id/slogan_loginActivity"
+        android:layout_width="354dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/slogan"
+        android:textColor="@color/blue"
+        android:textSize="25dp"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/email_connect"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.53" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/mate_logo" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="@string/email"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/email_connect"
+        app:layout_constraintStart_toStartOf="@+id/email_connect" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="@string/password"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/password_connect"
+        app:layout_constraintStart_toStartOf="@+id/password_connect" />
 </androidx.constraintlayout.widget.ConstraintLayout>

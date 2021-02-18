@@ -10,7 +10,7 @@
         android:id="@+id/recyclerview_latest_message"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#701B6C"
+        android:background="@color/purple_background"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

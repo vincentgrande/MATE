@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">MATE</string>
     <string name="success">Connexion réussie.</string>
+    <string name="noaccount">Pas encore de compte ?</string>
+    <string name="email">Email</string>
+    <string name="password">Mot de passe</string>
 </resources>
