@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/purple_background"
     tools:context=".ChatLogActivity">
 
     <EditText
@@ -17,7 +17,7 @@
         android:ems="10"
         android:hint="Enter Message"
         android:inputType="textPersonName"
-        android:background="@color/white"
+        android:background="@drawable/rounded_edittext"
         android:textColorHint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/send_button"
@@ -40,11 +40,24 @@
         android:id="@+id/recyclerview_chat_log"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="70dp"
         android:layout_marginBottom="8dp"
-        android:background="#701B6C"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/enter_message"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerview_chat_log"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+        <include layout="@layout/second_top_menu"/>
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 package fr.varko.mate
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -11,6 +12,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_chat_log.*
+import kotlinx.android.synthetic.main.second_top_menu.*
 
 
 class ChatLogActivity : AppCompatActivity() {
@@ -25,7 +27,13 @@ class ChatLogActivity : AppCompatActivity() {
 
         recyclerview_chat_log.adapter = adapter
         val user = intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
-        supportActionBar?.title = user.username
+        //supportActionBar?.title = user.username
+        toptext.text = user.username
+        back_button.setOnClickListener{
+            val intent = Intent(this,LatestMessagesActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+        }
         //setUpData()
         listenForMessages()
         send_button.setOnClickListener{

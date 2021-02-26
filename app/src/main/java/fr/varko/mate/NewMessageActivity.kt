@@ -13,12 +13,19 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_new_message.*
 import kotlinx.android.synthetic.main.bottom_menu.*
+import kotlinx.android.synthetic.main.second_top_menu.*
 
 class NewMessageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_message)
-        supportActionBar?.title = "Select User"
+        //supportActionBar?.title = "Select User"
+        toptext.text = getString(R.string.selectnewmessage)
+        back_button.setOnClickListener{
+            val intent = Intent(this,LatestMessagesActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+        }
         button_games.setOnClickListener{
             val intent = Intent(this,GamesActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
