@@ -12,7 +12,8 @@ import com.google.firebase.database.*
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_latest_messages.*
-
+import kotlinx.android.synthetic.main.bottom_menu.*
+import fr.varko.mate.BottomMenu.*
 
 class LatestMessagesActivity : AppCompatActivity() {
     companion object{
@@ -23,11 +24,23 @@ class LatestMessagesActivity : AppCompatActivity() {
         setContentView(R.layout.activity_latest_messages)
         recyclerview_latest_message.adapter = adapter
         recyclerview_latest_message.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+        ////  onClickListener des boutons du menu bas
         button_games.setOnClickListener{
             val intent = Intent(this,GamesActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
         }
+
+        button_lastmessage.setOnClickListener {
+            val intent = Intent(this,LatestMessagesActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+        }
+        button_newmessage.setOnClickListener {
+            val intent = Intent(this,NewMessageActivity::class.java)
+            startActivity(intent)
+        }
+        ////
         adapter.setOnItemClickListener { item, view ->
             val intent = Intent(this, ChatLogActivity::class.java)
             val row = item as LatestMessageRow
@@ -39,6 +52,7 @@ class LatestMessagesActivity : AppCompatActivity() {
         fetchCurrentuser()
         verifyUserIsLoggedIn()
     }
+
     private fun fetchCurrentuser(){
         val uid = FirebaseAuth.getInstance().uid
         val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
