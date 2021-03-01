@@ -15,6 +15,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
         android:ems="10"
+        android:paddingLeft="10dp"
         android:hint="Enter Message"
         android:inputType="textPersonName"
         android:background="@drawable/rounded_edittext"
