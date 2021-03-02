@@ -13,7 +13,7 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_latest_messages.*
 import kotlinx.android.synthetic.main.bottom_menu.*
-import fr.varko.mate.BottomMenu.*
+import kotlinx.android.synthetic.main.first_top_menu.*
 
 class LatestMessagesActivity : AppCompatActivity() {
     companion object{
@@ -31,14 +31,24 @@ class LatestMessagesActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        button_lastmessage.setOnClickListener {
+        /*button_lastmessage.setOnClickListener {
             val intent = Intent(this,LatestMessagesActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
-        }
+        }*/
         button_newmessage.setOnClickListener {
             val intent = Intent(this,NewMessageActivity::class.java)
             startActivity(intent)
+        }
+        ////
+        //// onClickListener des boutons du menu haut
+        button_settings.setOnClickListener {
+            val intent = Intent(this,SettingsActivity::class.java)
+            startActivity(intent)
+        }
+        button_menu.setOnClickListener {
+            //val intent = Intent(this,NewMessageActivity::class.java)
+            //startActivity(intent)
         }
         ////
         adapter.setOnItemClickListener { item, view ->

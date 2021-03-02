@@ -6,5 +6,7 @@
     <string name="email">Email</string>
     <string name="password">Mot de passe</string>
     <string name="selectnewmessage">Choisi un mate</string>
+    <string name="username">Pseudo :</string>
+    <string name="settings">-- Mes réglages --</string>
 
 </resources>

@@ -19,7 +19,7 @@
         app:srcCompat="@drawable/mate_logo" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/button_settings"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginTop="16dp"
@@ -34,7 +34,7 @@
         app:srcCompat="@drawable/settings" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/button_menu"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginStart="8dp"

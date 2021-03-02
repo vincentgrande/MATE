@@ -7,4 +7,9 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="selectnewmessage">Select a mate</string>
+    <string name="username">Nickname :</string>
+    <string name="settings">-- My settings --</string>
+
+
+
 </resources>
