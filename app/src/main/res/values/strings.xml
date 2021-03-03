@@ -11,6 +11,7 @@
     <string name="settings">-- My settings --</string>
     <string name="description">Description</string>
     <string name="save">Save</string>
+    <string name="modifsuccess">Modifications saved</string>
 
 
 </resources>

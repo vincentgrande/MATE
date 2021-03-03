@@ -10,4 +10,6 @@
     <string name="settings">-- Mes réglages --</string>
     <string name="description">Description</string>
     <string name="save">Enregister</string>
+    <string name="modifsuccess">Modifications sauvegardées</string>
+
 </resources>
