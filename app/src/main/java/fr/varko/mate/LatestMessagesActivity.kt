@@ -9,6 +9,7 @@ import android.view.MenuItem
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.google.firebase.database.collection.LLRBNode
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_latest_messages.*
@@ -30,7 +31,6 @@ class LatestMessagesActivity : AppCompatActivity() {
 
             startActivity(intent)
         }
-
         /*button_lastmessage.setOnClickListener {
             val intent = Intent(this,LatestMessagesActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)

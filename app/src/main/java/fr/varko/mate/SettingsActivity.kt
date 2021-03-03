@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.activity_settings.*
 import kotlinx.android.synthetic.main.bottom_menu.*
 import kotlinx.android.synthetic.main.chat_from_row.view.*
 import kotlinx.android.synthetic.main.first_top_menu.*
+import kotlinx.android.synthetic.main.settings.*
 
 class SettingsActivity : AppCompatActivity() {
 
