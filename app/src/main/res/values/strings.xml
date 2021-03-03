@@ -9,6 +9,8 @@
     <string name="selectnewmessage">Select a mate</string>
     <string name="username">Nickname :</string>
     <string name="settings">-- My settings --</string>
+    <string name="description">Description</string>
+    <string name="save">Save</string>
 
 
 
