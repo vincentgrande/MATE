@@ -27,7 +27,7 @@ class LatestMessagesActivity : AppCompatActivity() {
         ////  onClickListener des boutons du menu bas
         button_games.setOnClickListener{
             val intent = Intent(this,GamesActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+
             startActivity(intent)
         }
 
