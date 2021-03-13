@@ -81,6 +81,7 @@ class SettingsActivity : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val currentUser = snapshot.getValue(User::class.java)
                 edittextusername.setText(currentUser?.username)
+                edittextdescription.setText(currentUser?.description)
                 val uri = currentUser?.profileImageUrl
                 val targetImageView = profileImageUrl
                 Picasso.get().load(uri).into(targetImageView )
@@ -102,6 +103,14 @@ class SettingsActivity : AppCompatActivity() {
         username.setValue(edittextusername.text.toString())
                 .addOnSuccessListener {
                     Log.d("SettingsActivity", "We save successfully username to Firebase Database")
+                }
+                .addOnFailureListener {
+                    Log.d("SettingsActivity", "Failed to save username : ${it.message}")
+                }
+        val description = FirebaseDatabase.getInstance().getReference(("/users/$uid/description"))
+        description.setValue(edittextdescription.text.toString())
+                .addOnSuccessListener {
+                    Log.d("SettingsActivity", "We save successfully description to Firebase Database")
                 }
                 .addOnFailureListener {
                     Log.d("SettingsActivity", "Failed to save username : ${it.message}")
