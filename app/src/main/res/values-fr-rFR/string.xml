@@ -11,5 +11,6 @@
     <string name="description">Description</string>
     <string name="save">Enregister</string>
     <string name="modifsuccess">Modifications sauvegardées</string>
+    <string name="disconnect">Déconnexion</string>
 
 </resources>

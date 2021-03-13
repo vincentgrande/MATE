@@ -12,6 +12,8 @@
     <string name="description">Description</string>
     <string name="save">Save</string>
     <string name="modifsuccess">Modifications saved</string>
+    <string name="disconnect">Disconnect</string>
+
 
 
 </resources>
