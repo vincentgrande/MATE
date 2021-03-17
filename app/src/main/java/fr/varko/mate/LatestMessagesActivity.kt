@@ -1,11 +1,14 @@
 package fr.varko.mate
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.MotionEvent
+import android.view.View
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -57,6 +60,18 @@ class LatestMessagesActivity : AppCompatActivity() {
             intent.putExtra(NewMessageActivity.USER_KEY, row.chatPartnerUser)
             startActivity(intent)
         }
+
+        button_lastmessage.setOnTouchListener(object : View.OnTouchListener {
+            @SuppressLint("ResourceAsColor")
+            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+                when (event?.action) {
+                    MotionEvent.ACTION_DOWN -> button_newmessage.setBackgroundColor(R.color.blue)
+                    MotionEvent.ACTION_UP -> button_newmessage.setBackgroundColor(R.color.purple_background)
+                }
+
+                return v?.onTouchEvent(event) ?: true
+            }
+        })
 
         listenForLatestMessages()
         fetchCurrentuser()
