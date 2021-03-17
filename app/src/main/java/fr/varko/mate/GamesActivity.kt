@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.activity_games.*
 
 class GamesActivity : AppCompatActivity() {
     private lateinit var database: FirebaseDatabase
-    val gameItems: MutableList<GameItem> = mutableListOf()
+    val gameItems = arrayListOf<Long>()
     private val uid = FirebaseAuth.getInstance().uid ?: ""
     val refUsers = FirebaseDatabase.getInstance().getReference(("/users/$uid"))
 
@@ -43,10 +43,11 @@ class GamesActivity : AppCompatActivity() {
                     adapter.add(GameItem(game))
                     adapter.setOnItemClickListener { game, view ->
                         val gameItem = game as GameItem
-                        if (gameItems.contains(gameItem)) {
-                            gameItems.remove(gameItem)
+                        var id:Long = gameItem.game?.id ?: 0
+                        if (gameItems.contains(id)) {
+                            gameItems.remove(id)
                         } else {
-                            gameItems.add(gameItem)
+                            gameItems.add(id)
                         }
                         Log.d("GamesActivity", "$gameItems")
                     }
