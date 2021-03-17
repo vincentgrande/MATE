@@ -61,7 +61,7 @@ class LatestMessagesActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        button_lastmessage.setOnTouchListener(object : View.OnTouchListener {
+        /*button_lastmessage.setOnTouchListener(object : View.OnTouchListener {
             @SuppressLint("ResourceAsColor")
             override fun onTouch(v: View?, event: MotionEvent?): Boolean {
                 when (event?.action) {
@@ -71,7 +71,7 @@ class LatestMessagesActivity : AppCompatActivity() {
 
                 return v?.onTouchEvent(event) ?: true
             }
-        })
+        })*/
 
         listenForLatestMessages()
         fetchCurrentuser()
