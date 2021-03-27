@@ -3,35 +3,34 @@ package fr.varko.mate
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
 import android.widget.Toast
-import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
-import kotlinx.android.synthetic.main.activity_latest_messages.*
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_settings.*
 import kotlinx.android.synthetic.main.bottom_menu.*
-import kotlinx.android.synthetic.main.chat_from_row.view.*
 import kotlinx.android.synthetic.main.first_top_menu.*
+import kotlinx.android.synthetic.main.plateform_row.*
+import kotlinx.android.synthetic.main.plateform_row.view.*
 import kotlinx.android.synthetic.main.settings.*
 import java.util.*
+
 
 class SettingsActivity : AppCompatActivity() {
     companion object{
         val uid = FirebaseAuth.getInstance().uid ?: ""
-        var plateform: Plateform? = null
-
+        val plateformList = arrayListOf<Int>()
+        val refUsers = FirebaseDatabase.getInstance().getReference(("/users/$uid"))
+        val adapter = GroupAdapter<ViewHolder>()
+        val plateformNameMap = HashMap<String, Plateform>()
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
@@ -137,6 +136,9 @@ class SettingsActivity : AppCompatActivity() {
                         }
                     }
         }
+        Log.d("test", "LA "+plateformList.toString())
+        refUsers.child("plateform").removeValue()
+        refUsers.child("plateform").setValue("$plateformList")
         Toast.makeText(this,getString(R.string.modifsuccess), Toast.LENGTH_SHORT).show()
     }
     private fun savePhotoToFirebaseDatabase(profileImageUrl: String){
@@ -150,16 +152,17 @@ class SettingsActivity : AppCompatActivity() {
                 }
 
     }
-    val adapter = GroupAdapter<ViewHolder>()
 
     private fun refreshRecyclerView(){
         adapter.clear()
+        plateformList.clear()
         plateformNameMap.values.forEach{
             adapter.add((SettingsPlateformRow(it)))
         }
+
     }
 
-    val plateformNameMap = HashMap<String, Plateform>()
+
     private fun listenForPlateform(){
 
         val ref = FirebaseDatabase.getInstance().getReference("/plateform/")
