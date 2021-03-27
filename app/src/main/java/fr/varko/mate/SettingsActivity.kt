@@ -136,7 +136,6 @@ class SettingsActivity : AppCompatActivity() {
                         }
                     }
         }
-        Log.d("test", "LA "+plateformList.toString())
         refUsers.child("plateform").removeValue()
         refUsers.child("plateform").setValue("$plateformList")
         Toast.makeText(this,getString(R.string.modifsuccess), Toast.LENGTH_SHORT).show()
@@ -150,7 +149,6 @@ class SettingsActivity : AppCompatActivity() {
                 .addOnFailureListener {
                     Log.d("SettingsActivity", "Failed to save photo : ${it.message}")
                 }
-
     }
 
     private fun refreshRecyclerView(){
@@ -159,9 +157,7 @@ class SettingsActivity : AppCompatActivity() {
         plateformNameMap.values.forEach{
             adapter.add((SettingsPlateformRow(it)))
         }
-
     }
-
 
     private fun listenForPlateform(){
 

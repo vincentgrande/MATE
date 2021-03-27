@@ -18,7 +18,6 @@ class SettingsPlateformRow (val plateform: Plateform): Item<ViewHolder>(){
         viewHolder.itemView.checkBox_plateform.setOnCheckedChangeListener { buttonView, isChecked ->
             if(isChecked) plateformList.add(plateform?.id)
             else if(!isChecked) plateformList.remove(plateform?.id)
-            Log.d("ici", plateformList.toString())
         }
         val usedPlateform =  FirebaseDatabase.getInstance().getReference(("/users/${SettingsActivity.uid}/plateform/"))
         usedPlateform.addValueEventListener(object: ValueEventListener {
