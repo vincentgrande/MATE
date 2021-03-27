@@ -116,12 +116,11 @@
         android:id="@+id/button_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="16dp"
         android:text="@string/save"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edittextdescription" />
+        app:layout_constraintTop_toBottomOf="@+id/recyclerview_plateform" />
 
     <Button
         android:id="@+id/button_disconnect"
@@ -144,26 +143,15 @@
         app:layout_constraintStart_toStartOf="@+id/edittextdescription"
         app:layout_constraintTop_toBottomOf="@+id/edittextdescription" />
 
-    <CheckBox
-        android:id="@+id/checkBox_computer"
-        android:layout_width="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview_plateform"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="@string/computer"
-        android:textColor="@color/white"
-        android:textSize="20dp"
+        android:layout_marginEnd="16dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/plateform_textview"
         app:layout_constraintTop_toBottomOf="@+id/plateform_textview" />
-
-    <CheckBox
-        android:id="@+id/checkBox_playstation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/playstation"
-        android:textColor="@color/white"
-        android:textSize="20dp"
-        app:layout_constraintStart_toStartOf="@+id/checkBox_computer"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox_computer" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

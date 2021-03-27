@@ -29,10 +29,13 @@ import java.util.*
 class SettingsActivity : AppCompatActivity() {
     companion object{
         val uid = FirebaseAuth.getInstance().uid ?: ""
+        var plateform: Plateform? = null
+
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
+        recyclerview_plateform.adapter = adapter
         ////  onClickListener des boutons du menu bas
         button_games.setOnClickListener{
             val intent = Intent(this,GamesActivity::class.java)
@@ -73,6 +76,7 @@ class SettingsActivity : AppCompatActivity() {
             intent.type = "image/*"
             startActivityForResult(intent,0)
         }
+        listenForPlateform()
         fetchCurrentuser()
     }
 
@@ -145,5 +149,40 @@ class SettingsActivity : AppCompatActivity() {
                     Log.d("SettingsActivity", "Failed to save photo : ${it.message}")
                 }
 
+    }
+    val adapter = GroupAdapter<ViewHolder>()
+
+    private fun refreshRecyclerView(){
+        adapter.clear()
+        plateformNameMap.values.forEach{
+            adapter.add((SettingsPlateformRow(it)))
+        }
+    }
+
+    val plateformNameMap = HashMap<String, Plateform>()
+    private fun listenForPlateform(){
+
+        val ref = FirebaseDatabase.getInstance().getReference("/plateform/")
+        ref.addChildEventListener(object: ChildEventListener{
+            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+                val plateformName = snapshot.getValue(Plateform::class.java) ?: return
+                plateformNameMap[snapshot.key!!] = plateformName
+                refreshRecyclerView()
+            }
+            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+                val plateformName = snapshot.getValue(Plateform::class.java) ?: return
+                plateformNameMap[snapshot.key!!] = plateformName
+                refreshRecyclerView()
+            }
+            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
+
+            }
+            override fun onChildRemoved(snapshot: DataSnapshot) {
+
+            }
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
     }
 }
