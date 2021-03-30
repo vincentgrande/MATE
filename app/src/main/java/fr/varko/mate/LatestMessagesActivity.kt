@@ -31,14 +31,8 @@ class LatestMessagesActivity : AppCompatActivity() {
         ////  onClickListener des boutons du menu bas
         button_games.setOnClickListener{
             val intent = Intent(this,GamesActivity::class.java)
-
             startActivity(intent)
         }
-        /*button_lastmessage.setOnClickListener {
-            val intent = Intent(this,LatestMessagesActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
-        }*/
         button_newmessage.setOnClickListener {
             val intent = Intent(this,NewMessageActivity::class.java)
             startActivity(intent)
@@ -49,10 +43,6 @@ class LatestMessagesActivity : AppCompatActivity() {
             val intent = Intent(this,SettingsActivity::class.java)
             startActivity(intent)
         }
-        button_menu.setOnClickListener {
-            //val intent = Intent(this,NewMessageActivity::class.java)
-            //startActivity(intent)
-        }
         ////
         adapter.setOnItemClickListener { item, view ->
             val intent = Intent(this, ChatLogActivity::class.java)
@@ -60,19 +50,6 @@ class LatestMessagesActivity : AppCompatActivity() {
             intent.putExtra(NewMessageActivity.USER_KEY, row.chatPartnerUser)
             startActivity(intent)
         }
-
-        /*button_lastmessage.setOnTouchListener(object : View.OnTouchListener {
-            @SuppressLint("ResourceAsColor")
-            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
-                when (event?.action) {
-                    MotionEvent.ACTION_DOWN -> button_newmessage.setBackgroundColor(R.color.blue)
-                    MotionEvent.ACTION_UP -> button_newmessage.setBackgroundColor(R.color.purple_background)
-                }
-
-                return v?.onTouchEvent(event) ?: true
-            }
-        })*/
-
         listenForLatestMessages()
         fetchCurrentuser()
         verifyUserIsLoggedIn()
@@ -83,9 +60,7 @@ class LatestMessagesActivity : AppCompatActivity() {
         val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
         ref.addListenerForSingleValueEvent(object: ValueEventListener{
             override fun onCancelled(error: DatabaseError) {
-
             }
-
             override fun onDataChange(snapshot: DataSnapshot) {
                 currentUser = snapshot.getValue(User::class.java)
             }

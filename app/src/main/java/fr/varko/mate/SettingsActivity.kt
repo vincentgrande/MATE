@@ -52,14 +52,6 @@ class SettingsActivity : AppCompatActivity() {
             startActivity(intent)
         }
         ////
-        //// onClickListener des boutons du menu haut
-
-        button_menu.setOnClickListener {
-            //val intent = Intent(this,NewMessageActivity::class.java)
-            //startActivity(intent)
-        }
-        ////
-
         button_save.setOnClickListener {
 
             save()

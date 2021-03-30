@@ -16,6 +16,9 @@ import kotlinx.android.synthetic.main.bottom_menu.*
 import kotlinx.android.synthetic.main.second_top_menu.*
 
 class NewMessageActivity : AppCompatActivity() {
+    companion object{
+        val USER_KEY = "USER_KEY"
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_message)
@@ -39,9 +42,7 @@ class NewMessageActivity : AppCompatActivity() {
         }
         fetchUsers()
     }
-    companion object{
-        val USER_KEY = "USER_KEY"
-    }
+
     private fun fetchUsers(){
         val ref = FirebaseDatabase.getInstance().getReference("/users")
         ref.addListenerForSingleValueEvent(object:ValueEventListener{
