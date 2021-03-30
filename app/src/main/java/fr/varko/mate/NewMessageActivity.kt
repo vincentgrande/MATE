@@ -11,6 +11,8 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
+import fr.varko.mate.LatestMessagesActivity.Companion.currentUser
+import fr.varko.mate.SettingsActivity.Companion.stringToList
 import kotlinx.android.synthetic.main.activity_new_message.*
 import kotlinx.android.synthetic.main.bottom_menu.*
 import kotlinx.android.synthetic.main.second_top_menu.*
@@ -48,14 +50,25 @@ class NewMessageActivity : AppCompatActivity() {
         ref.addListenerForSingleValueEvent(object:ValueEventListener{
             override fun onDataChange(p0: DataSnapshot) {
                 val adapter = GroupAdapter<ViewHolder>()
+
                 p0.children.forEach {
                     Log.d("NewMessage",it.toString())
                     val user = it.getValue(User::class.java)
+
                     if (user != null){
                         if (user.uid != FirebaseAuth.getInstance().uid){
-                            Log.d("NewMessage",FirebaseAuth.getInstance().uid)
-                            adapter.add(UserItem(user))
+                        ////////
+                        val mate_plateform = stringToList(user?.plateform?: "")
+                        val currentUser_plateform = stringToList(currentUser?.plateform ?: "")
+                        currentUser_plateform.forEach {current ->
+                            mate_plateform.forEach{ mate ->
+                                if(current == mate){
+                                    adapter.add(UserItem(user))
+                                    }
+                                }
+                            }
                         }
+                        ////////
                     }
                     adapter.setOnItemClickListener { item, view ->
                         val userItem = item as UserItem
@@ -71,6 +84,7 @@ class NewMessageActivity : AppCompatActivity() {
             }
         })
     }
+
 }
 
 

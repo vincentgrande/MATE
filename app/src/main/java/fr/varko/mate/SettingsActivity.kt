@@ -29,6 +29,12 @@ class SettingsActivity : AppCompatActivity() {
         val refUsers = FirebaseDatabase.getInstance().getReference(("/users/$uid"))
         val adapter = GroupAdapter<ViewHolder>()
         val plateformNameMap = HashMap<String, Plateform>()
+        fun stringToList(string: String): List<String>{
+            var string = string.replace("[", "")
+            string = string.replace("]", "")
+            string = string.replace(" ","")
+            return string.split(",").toList()
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

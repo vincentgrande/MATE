@@ -89,7 +89,7 @@ class RegisterActivity : AppCompatActivity() {
         val uid = FirebaseAuth.getInstance().uid ?: ""
         val ref = FirebaseDatabase.getInstance().getReference(("/users/$uid"))
         Log.d("RegisterActivity","REF : $ref")
-        val user = User(uid,username_input.text.toString(),"",profileImageUrl,"")
+        val user = User(uid,username_input.text.toString(),"",profileImageUrl,"","")
         Log.d("RegisterActivity","USER : ${user.username} ${user.profileImageUrl}")
         ref.setValue(user)
             .addOnSuccessListener {

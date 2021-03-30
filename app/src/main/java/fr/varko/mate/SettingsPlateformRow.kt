@@ -9,6 +9,7 @@ import com.google.firebase.database.ValueEventListener
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
 import fr.varko.mate.SettingsActivity.Companion.plateformList
+import fr.varko.mate.SettingsActivity.Companion.stringToList
 import kotlinx.android.synthetic.main.plateform_row.view.*
 
 class SettingsPlateformRow (val plateform: Plateform): Item<ViewHolder>(){
@@ -25,10 +26,7 @@ class SettingsPlateformRow (val plateform: Plateform): Item<ViewHolder>(){
             }
             override fun onDataChange(snapshot: DataSnapshot) {
                 var snap = snapshot.getValue(String::class.java) ?: return
-                snap = snap.replace("[", "")
-                snap = snap.replace("]", "")
-                snap = snap.replace(" ","")
-                val plateformId = snap.split(",").toList()
+                val plateformId = stringToList(snap ?: "")
                 if(plateformId.contains(plateform.id.toString())){
                     viewHolder.itemView.checkBox_plateform.setChecked(true)
                 }
