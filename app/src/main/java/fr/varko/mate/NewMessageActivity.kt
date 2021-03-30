@@ -42,6 +42,10 @@ class NewMessageActivity : AppCompatActivity() {
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
         }
+        checkBox_sameplateform.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) fetchUsersSamePlateform()
+            else fetchUsers()
+        }
         fetchUsers()
     }
 
@@ -50,20 +54,46 @@ class NewMessageActivity : AppCompatActivity() {
         ref.addListenerForSingleValueEvent(object:ValueEventListener{
             override fun onDataChange(p0: DataSnapshot) {
                 val adapter = GroupAdapter<ViewHolder>()
-
+                p0.children.forEach {
+                    Log.d("NewMessage",it.toString())
+                    val user = it.getValue(User::class.java)
+                    if (user != null){
+                        if (user.uid != FirebaseAuth.getInstance().uid) {
+                            adapter.add(UserItem(user))
+                        }
+                    }
+                    adapter.setOnItemClickListener { item, view ->
+                        val userItem = item as UserItem
+                        val intent = Intent(view.context, ChatLogActivity::class.java)
+                        intent.putExtra(USER_KEY,userItem.user)
+                        startActivity(intent)
+                        finish()
+                    }
+                }
+                recyclerview_newmessage.adapter = adapter
+            }
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
+    }
+    private fun fetchUsersSamePlateform(){
+        val ref = FirebaseDatabase.getInstance().getReference("/users")
+        ref.addListenerForSingleValueEvent(object:ValueEventListener{
+            override fun onDataChange(p0: DataSnapshot) {
+                val adapter = GroupAdapter<ViewHolder>()
                 p0.children.forEach {
                     Log.d("NewMessage",it.toString())
                     val user = it.getValue(User::class.java)
 
                     if (user != null){
                         if (user.uid != FirebaseAuth.getInstance().uid){
-                        ////////
-                        val mate_plateform = stringToList(user?.plateform?: "")
-                        val currentUser_plateform = stringToList(currentUser?.plateform ?: "")
-                        currentUser_plateform.forEach {current ->
-                            mate_plateform.forEach{ mate ->
-                                if(current == mate){
-                                    adapter.add(UserItem(user))
+                            ////////
+                            val mate_plateform = stringToList(user?.plateform?: "")
+                            val currentUser_plateform = stringToList(currentUser?.plateform ?: "")
+                            currentUser_plateform.forEach {current ->
+                                mate_plateform.forEach{ mate ->
+                                    if(current == mate){
+                                        adapter.add(UserItem(user))
                                     }
                                 }
                             }
@@ -84,7 +114,6 @@ class NewMessageActivity : AppCompatActivity() {
             }
         })
     }
-
 }
 
 

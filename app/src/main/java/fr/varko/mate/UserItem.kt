@@ -8,6 +8,7 @@ import kotlinx.android.synthetic.main.user_row_newmessage.view.*
 class UserItem(val user: User): Item<ViewHolder>(){
     override fun bind(viewHolder: ViewHolder, position: Int) {
         viewHolder.itemView.username_newmessage.text = user.username
+        viewHolder.itemView.plateform_newmessage.text = user.plateform
         Picasso.get().load(user.profileImageUrl).into(viewHolder.itemView.immageview_newmessage)
     }
     override fun getLayout(): Int {
