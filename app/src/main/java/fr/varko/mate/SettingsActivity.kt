@@ -5,9 +5,12 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.addTextChangedListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
@@ -35,6 +38,7 @@ class SettingsActivity : AppCompatActivity() {
             string = string.replace(" ","")
             return string.split(",").toList()
         }
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,10 +62,7 @@ class SettingsActivity : AppCompatActivity() {
             startActivity(intent)
         }
         ////
-        button_save.setOnClickListener {
 
-            save()
-        }
         button_disconnect.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
             val intent = Intent(this,RegisterActivity::class.java)
@@ -73,6 +74,32 @@ class SettingsActivity : AppCompatActivity() {
             intent.type = "image/*"
             startActivityForResult(intent,0)
         }
+        edittextdescription.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                save()
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                save()
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                save()
+            }
+        })
+        edittextusername.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                save()
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                save()
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                save()
+            }
+        })
         listenForPlateform()
         fetchCurrentuser()
     }
@@ -107,7 +134,7 @@ class SettingsActivity : AppCompatActivity() {
         }
     }
 
-    private fun save(){
+     fun save(){
         val username = FirebaseDatabase.getInstance().getReference(("/users/$uid/username"))
         username.setValue(edittextusername.text.toString())
                 .addOnSuccessListener {
@@ -124,9 +151,6 @@ class SettingsActivity : AppCompatActivity() {
                 .addOnFailureListener {
                     Log.d("SettingsActivity", "Failed to save username : ${it.message}")
                 }
-
-        refUsers.child("plateform").removeValue()
-        refUsers.child("plateform").setValue("$plateformList")
         Toast.makeText(this,getString(R.string.modifsuccess), Toast.LENGTH_SHORT).show()
     }
     private fun savePhotoToFirebaseDatabase(){

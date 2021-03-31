@@ -17,8 +17,18 @@ class SettingsPlateformRow (val plateform: Plateform): Item<ViewHolder>(){
     override fun bind(viewHolder: ViewHolder, position: Int) {
         viewHolder.itemView.checkBox_plateform.setText(plateform?.name.toString())
         viewHolder.itemView.checkBox_plateform.setOnCheckedChangeListener { buttonView, isChecked ->
-            if(isChecked) plateformList.add(plateform?.id)
-            else if(!isChecked) plateformList.remove(plateform?.id)
+            if(isChecked) {
+                plateformList.add(plateform?.id)
+
+                SettingsActivity.refUsers.child("plateform").removeValue()
+                SettingsActivity.refUsers.child("plateform").setValue("$plateformList")
+            }
+            else if(!isChecked) {
+                plateformList.remove(plateform?.id)
+
+                SettingsActivity.refUsers.child("plateform").removeValue()
+                SettingsActivity.refUsers.child("plateform").setValue("$plateformList")
+            }
         }
         val usedPlateform =  FirebaseDatabase.getInstance().getReference(("/users/${SettingsActivity.uid}/plateform/"))
         usedPlateform.addValueEventListener(object: ValueEventListener {
