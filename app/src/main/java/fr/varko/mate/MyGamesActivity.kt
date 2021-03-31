@@ -12,6 +12,7 @@ import fr.varko.mate.SettingsActivity.Companion.stringToList
 import kotlinx.android.synthetic.main.activity_games.*
 import kotlinx.android.synthetic.main.activity_my_games.*
 import kotlinx.android.synthetic.main.plateform_row.view.*
+import kotlinx.android.synthetic.main.game_row.*
 
 class MyGamesActivity : AppCompatActivity() {
     private lateinit var database: FirebaseDatabase
@@ -27,7 +28,6 @@ class MyGamesActivity : AppCompatActivity() {
             return string.split(",").toList()
         }
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +46,6 @@ class MyGamesActivity : AppCompatActivity() {
 
     private fun showMyGames(){
         val refMyGames = refUsers.child("playedGames")
-
         Log.d("MyGamesActivity", "refMyGames : $refMyGames")
         refMyGames.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -54,9 +53,21 @@ class MyGamesActivity : AppCompatActivity() {
                 val gamesId = SettingsActivity.stringToList(snap ?: "")
                 Log.d("MyGamesActivity", "$gamesId")
                 var i = 0
-                gamesId.forEach{
+                gamesId.forEach {
                     val id = gamesId[i]
                     val refGames = FirebaseDatabase.getInstance().getReference("/games/$id")
+                    refGames.addListenerForSingleValueEvent(object : ValueEventListener {
+                        override fun onDataChange(gameSnapshot: DataSnapshot) {
+                            val gameName = gameSnapshot.child("name").getValue()
+                            Log.d("MyGamesActivity","$gameName")
+
+                        }
+
+                        override fun onCancelled(error: DatabaseError) {
+
+                        }
+
+                    })
                     Log.d("MyGamesActivity", "$refGames")
                     i++
 
@@ -65,9 +76,9 @@ class MyGamesActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
             }
         })
-
     }
+
+
 }
