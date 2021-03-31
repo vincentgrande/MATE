@@ -48,12 +48,12 @@ class NewMessageActivity : AppCompatActivity() {
         }
         fetchUsers()
     }
-
+    val adapter = GroupAdapter<ViewHolder>()
     private fun fetchUsers(){
+        adapter.clear()
         val ref = FirebaseDatabase.getInstance().getReference("/users")
         ref.addListenerForSingleValueEvent(object:ValueEventListener{
             override fun onDataChange(p0: DataSnapshot) {
-                val adapter = GroupAdapter<ViewHolder>()
                 p0.children.forEach {
                     Log.d("NewMessage",it.toString())
                     val user = it.getValue(User::class.java)
@@ -77,22 +77,24 @@ class NewMessageActivity : AppCompatActivity() {
         })
     }
     private fun fetchUsersSamePlateform(){
+        adapter.clear()
+        var mates = arrayListOf<String>()
         val ref = FirebaseDatabase.getInstance().getReference("/users")
         ref.addListenerForSingleValueEvent(object:ValueEventListener{
             override fun onDataChange(p0: DataSnapshot) {
-                val adapter = GroupAdapter<ViewHolder>()
                 p0.children.forEach {
                     Log.d("NewMessage",it.toString())
                     val user = it.getValue(User::class.java)
 
-                    if (user != null){
+                    if (user != null ){
                         if (user.uid != FirebaseAuth.getInstance().uid){
                             ////////
                             val mate_plateform = stringToList(user?.plateform?: "")
                             val currentUser_plateform = stringToList(currentUser?.plateform ?: "")
                             currentUser_plateform.forEach {current ->
                                 mate_plateform.forEach{ mate ->
-                                    if(current == mate){
+                                    if(current == mate && user.uid !in mates){
+                                        mates.add(user.uid)
                                         adapter.add(UserItem(user))
                                     }
                                 }
