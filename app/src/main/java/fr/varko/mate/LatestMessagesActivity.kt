@@ -30,11 +30,12 @@ class LatestMessagesActivity : AppCompatActivity() {
         recyclerview_latest_message.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
         ////  onClickListener des boutons du menu bas
         button_games.setOnClickListener{
-            val intent = Intent(this,GamesActivity::class.java)
+            val intent = Intent(this,MyGamesActivity::class.java)
             startActivity(intent)
         }
         button_newmessage.setOnClickListener {
-            val intent = Intent(this,NewMessageActivity::class.java)
+            //val intent = Intent(this,NewMessageActivity::class.java)
+            val intent = Intent(this,GamesActivity::class.java)
             startActivity(intent)
         }
         ////

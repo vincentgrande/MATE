@@ -4,12 +4,14 @@ package fr.varko.mate
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_games.*
+import kotlinx.android.synthetic.main.game_row.*
 
 
 class GamesActivity : AppCompatActivity() {
@@ -47,9 +49,10 @@ class GamesActivity : AppCompatActivity() {
                         if (gameItems.contains(id)) {
                             gameItems.remove(id)
                         } else {
+                            //imageView_game.setBackgroundResource(R.drawable.border)
                             gameItems.add(id)
                         }
-                        Log.d("GamesActivity", "$gameItems")
+                        Log.d("GamesActivity", "$gameItem")
                     }
                 }
             }
