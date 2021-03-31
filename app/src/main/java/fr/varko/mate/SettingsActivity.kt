@@ -103,8 +103,10 @@ class SettingsActivity : AppCompatActivity() {
             selectedPhotoUri = data.data
             val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, selectedPhotoUri)
             profileImageUrl.setImageBitmap(bitmap)
+            savePhotoToFirebaseDatabase()
         }
     }
+
     private fun save(){
         val username = FirebaseDatabase.getInstance().getReference(("/users/$uid/username"))
         username.setValue(edittextusername.text.toString())
@@ -122,31 +124,30 @@ class SettingsActivity : AppCompatActivity() {
                 .addOnFailureListener {
                     Log.d("SettingsActivity", "Failed to save username : ${it.message}")
                 }
-        if (selectedPhotoUri != null) {
-            val filename = UUID.randomUUID().toString()
-            val ref = FirebaseStorage.getInstance().getReference("/images/$filename")
-            ref.putFile(selectedPhotoUri!!)
-                    .addOnSuccessListener {
-                        Log.d("SettingsActivity", "Successfully uploaded image :  ${it.metadata?.path}")
-                        ref.downloadUrl.addOnSuccessListener {
-                            Log.d("SettingsActivity", "File location : $it")
-                            savePhotoToFirebaseDatabase(it.toString())
-                        }
-                    }
-        }
+
         refUsers.child("plateform").removeValue()
         refUsers.child("plateform").setValue("$plateformList")
         Toast.makeText(this,getString(R.string.modifsuccess), Toast.LENGTH_SHORT).show()
     }
-    private fun savePhotoToFirebaseDatabase(profileImageUrl: String){
-        val photo = FirebaseDatabase.getInstance().getReference(("/users/$uid/profileImageUrl"))
-        photo.setValue(profileImageUrl)
-                .addOnSuccessListener {
-                    Log.d("SettingsActivity", "We save successfully the photo to Firebase Database")
+    private fun savePhotoToFirebaseDatabase(){
+        val filename = UUID.randomUUID().toString()
+        val ref = FirebaseStorage.getInstance().getReference("/images/$filename")
+        ref.putFile(selectedPhotoUri!!)
+            .addOnSuccessListener {
+                Log.d("SettingsActivity", "Successfully uploaded image :  ${it.metadata?.path}")
+                ref.downloadUrl.addOnSuccessListener {
+                    Log.d("SettingsActivity", "File location : $it")
+                    val photo = FirebaseDatabase.getInstance().getReference(("/users/$uid/profileImageUrl"))
+                    photo.setValue(it.toString())
+                        .addOnSuccessListener {
+                            Log.d("SettingsActivity", "We save successfully the photo to Firebase Database")
+                        }
+                        .addOnFailureListener {
+                            Log.d("SettingsActivity", "Failed to save photo : ${it.message}")
+                        }
                 }
-                .addOnFailureListener {
-                    Log.d("SettingsActivity", "Failed to save photo : ${it.message}")
-                }
+            }
+
     }
 
     private fun refreshRecyclerView(){
