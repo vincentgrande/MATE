@@ -11,6 +11,7 @@ import com.xwray.groupie.ViewHolder
 import fr.varko.mate.SettingsActivity.Companion.stringToList
 import kotlinx.android.synthetic.main.activity_games.*
 import kotlinx.android.synthetic.main.activity_my_games.*
+import kotlinx.android.synthetic.main.my_games_row.*
 import kotlinx.android.synthetic.main.plateform_row.view.*
 import kotlinx.android.synthetic.main.game_row.*
 
@@ -54,13 +55,18 @@ class MyGamesActivity : AppCompatActivity() {
                 Log.d("MyGamesActivity", "$gamesId")
                 var i = 0
                 gamesId.forEach {
-                    val id = gamesId[i]
+                    var id = gamesId[i]
                     val refGames = FirebaseDatabase.getInstance().getReference("/games/$id")
+
                     refGames.addListenerForSingleValueEvent(object : ValueEventListener {
                         override fun onDataChange(gameSnapshot: DataSnapshot) {
-                            val gameName = gameSnapshot.child("name").getValue()
+                            val gameId = id.toLong()
+                            val gameName = gameSnapshot.child("name").getValue().toString()
+                            val gameImg = gameSnapshot.child("img").getValue().toString()
+                            val gameIsRankable = gameSnapshot.child("isRankable").getValue().toString()
+                            val myGame = Game(gameId, gameName, gameImg, gameIsRankable, false)
+                            adapter.add(GameItem(myGame))
                             Log.d("MyGamesActivity","$gameName")
-
                         }
 
                         override fun onCancelled(error: DatabaseError) {
