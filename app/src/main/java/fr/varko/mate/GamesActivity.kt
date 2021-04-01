@@ -12,6 +12,7 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_games.*
 import kotlinx.android.synthetic.main.game_row.*
+import kotlinx.android.synthetic.main.game_row.view.*
 
 
 class GamesActivity : AppCompatActivity() {
@@ -48,6 +49,7 @@ class GamesActivity : AppCompatActivity() {
                         var id:Long = gameItem.game?.id ?: 0
                         if (gameItems.contains(id)) {
                             gameItems.remove(id)
+                                //viewHolder.itemView.checkBoxGames.isChecked = true
                         } else {
                             //imageView_game.setBackgroundResource(R.drawable.border)
                             gameItems.add(id)
@@ -60,4 +62,5 @@ class GamesActivity : AppCompatActivity() {
             }
         })
     }
-}
+
+    }
