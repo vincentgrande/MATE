@@ -31,9 +31,8 @@ class LatestMessagesActivity : AppCompatActivity() {
         recyclerview_latest_message.adapter = adapter
         recyclerview_latest_message.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
 
-        val isOnline = isOnline(this)
-        Log.d("internet", "isOnline : $isOnline")
-        if(!isOnline) Toast.makeText(this,"No internet connection", Toast.LENGTH_SHORT).show()
+        isOnline(this)
+
         ////  onClickListener des boutons du menu bas
         button_games.setOnClickListener{
             val intent = Intent(this,MyGamesActivity::class.java)

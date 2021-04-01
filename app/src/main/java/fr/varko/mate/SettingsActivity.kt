@@ -47,8 +47,7 @@ class SettingsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_settings)
         recyclerview_plateform.adapter = adapter
 
-        val isOnline = isOnline(this)
-        if(isOnline==false) Toast.makeText(this,"No internet connection", Toast.LENGTH_SHORT).show()
+        isOnline(this)
         ////  onClickListener des boutons du menu bas
         button_games.setOnClickListener{
             val intent = Intent(this,GamesActivity::class.java)

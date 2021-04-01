@@ -25,8 +25,7 @@ class ChatLogActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_log)
-        val isOnline = InternetCheck.isOnline(this)
-        if(isOnline==false) Toast.makeText(this,"No internet connection", Toast.LENGTH_SHORT).show()
+        InternetCheck.isOnline(this)
         recyclerview_chat_log.adapter = adapter
         val user = intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
         //supportActionBar?.title = user.username

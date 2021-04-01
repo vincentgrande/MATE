@@ -22,8 +22,7 @@ class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val isOnline = InternetCheck.isOnline(this)
-        if(isOnline==false) Toast.makeText(this,"No internet connection", Toast.LENGTH_SHORT).show()
+        InternetCheck.isOnline(this)
         title="MATE Register"
         register.setOnClickListener {
             register()

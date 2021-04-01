@@ -26,6 +26,7 @@ class InternetCheck {
                     }
                 }
             }
+            Toast.makeText(context,"No internet connection", Toast.LENGTH_SHORT).show()
             Log.i("Internet", "No internet connection")
             return false
         }
