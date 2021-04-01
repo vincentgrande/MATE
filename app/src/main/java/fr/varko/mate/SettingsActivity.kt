@@ -23,6 +23,7 @@ import kotlinx.android.synthetic.main.plateform_row.*
 import kotlinx.android.synthetic.main.plateform_row.view.*
 import kotlinx.android.synthetic.main.settings.*
 import java.util.*
+import fr.varko.mate.InternetCheck.Companion.isOnline
 
 
 class SettingsActivity : AppCompatActivity() {
@@ -45,6 +46,9 @@ class SettingsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
         recyclerview_plateform.adapter = adapter
+
+        val isOnline = isOnline(this)
+        if(isOnline==false) Toast.makeText(this,"No internet connection", Toast.LENGTH_SHORT).show()
         ////  onClickListener des boutons du menu bas
         button_games.setOnClickListener{
             val intent = Intent(this,GamesActivity::class.java)

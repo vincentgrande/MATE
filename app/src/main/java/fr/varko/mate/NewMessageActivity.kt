@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -24,7 +25,8 @@ class NewMessageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_message)
-        //supportActionBar?.title = "Select User"
+        val isOnline = InternetCheck.isOnline(this)
+        if(isOnline==false) Toast.makeText(this,"No internet connection", Toast.LENGTH_SHORT).show()
         toptext.text = getString(R.string.selectnewmessage)
         back_button.setOnClickListener{
             val intent = Intent(this,LatestMessagesActivity::class.java)

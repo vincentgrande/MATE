@@ -9,12 +9,14 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.database.collection.LLRBNode
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
+import fr.varko.mate.InternetCheck.Companion.isOnline
 import kotlinx.android.synthetic.main.activity_latest_messages.*
 import kotlinx.android.synthetic.main.bottom_menu.*
 import kotlinx.android.synthetic.main.first_top_menu.*
@@ -28,6 +30,10 @@ class LatestMessagesActivity : AppCompatActivity() {
         setContentView(R.layout.activity_latest_messages)
         recyclerview_latest_message.adapter = adapter
         recyclerview_latest_message.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+
+        val isOnline = isOnline(this)
+        Log.d("internet", "isOnline : $isOnline")
+        if(!isOnline) Toast.makeText(this,"No internet connection", Toast.LENGTH_SHORT).show()
         ////  onClickListener des boutons du menu bas
         button_games.setOnClickListener{
             val intent = Intent(this,MyGamesActivity::class.java)
