@@ -14,16 +14,21 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.database.collection.LLRBNode
+import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import fr.varko.mate.InternetCheck.Companion.isOnline
 import kotlinx.android.synthetic.main.activity_latest_messages.*
 import kotlinx.android.synthetic.main.bottom_menu.*
 import kotlinx.android.synthetic.main.first_top_menu.*
+import kotlinx.android.synthetic.main.latest_message_row.view.*
+import kotlinx.android.synthetic.main.profile_custom_dialog.*
 
 class LatestMessagesActivity : AppCompatActivity() {
     companion object{
         var currentUser: User? = null
+        val adapter = GroupAdapter<ViewHolder>()
+
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,8 +44,8 @@ class LatestMessagesActivity : AppCompatActivity() {
             startActivity(intent)
         }
         button_newmessage.setOnClickListener {
-            //val intent = Intent(this,NewMessageActivity::class.java)
-            val intent = Intent(this,GamesActivity::class.java)
+            val intent = Intent(this,NewMessageActivity::class.java)
+            //val intent = Intent(this,GamesActivity::class.java)
             startActivity(intent)
         }
         ////
@@ -50,12 +55,21 @@ class LatestMessagesActivity : AppCompatActivity() {
             startActivity(intent)
         }
         ////
+
         adapter.setOnItemClickListener { item, view ->
             val intent = Intent(this, ChatLogActivity::class.java)
             val row = item as LatestMessageRow
             intent.putExtra(NewMessageActivity.USER_KEY, row.chatPartnerUser)
             startActivity(intent)
         }
+        adapter.setOnItemLongClickListener { item, view ->
+            val uid:String
+            val row = item as LatestMessageRow
+            if (row.chatMessage.fromId == FirebaseAuth.getInstance().uid) uid = row.chatMessage.toId else uid = row.chatMessage.fromId
+            ProfileDialog(uid).show(supportFragmentManager, "MyCustomFragment")
+            return@setOnItemLongClickListener(true)
+        }
+
         listenForLatestMessages()
         fetchCurrentuser()
         verifyUserIsLoggedIn()
@@ -114,7 +128,7 @@ class LatestMessagesActivity : AppCompatActivity() {
             }
         })
     }
-    val adapter = GroupAdapter<ViewHolder>()
+
 
     private fun verifyUserIsLoggedIn(){
         val uid = FirebaseAuth.getInstance().uid

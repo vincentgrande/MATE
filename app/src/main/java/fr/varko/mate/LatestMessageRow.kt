@@ -25,7 +25,7 @@ class LatestMessageRow(val chatMessage: ChatMessage): Item<ViewHolder>(){
                 chatPartnerUser = snapshot.getValue(User::class.java)
                 val uri = chatPartnerUser?.profileImageUrl
                 viewHolder.itemView.username_last_message.text = chatPartnerUser?.username
-                val targetImageView = viewHolder.itemView.imageview_latest_message
+                val targetImageView = viewHolder.itemView.imageview_profile
                 Picasso.get().load(uri).into(targetImageView)
             }
         })

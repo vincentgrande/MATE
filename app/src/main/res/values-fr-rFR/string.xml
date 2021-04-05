@@ -12,7 +12,7 @@
     <string name="save">Enregister</string>
     <string name="modifsuccess">Modifications sauvegardées</string>
     <string name="disconnect">Déconnexion</string>
-    <string name="plateform">Plateforme</string>
+    <string name="plateform">Plateformes</string>
     <string name="computer">Ordinateur</string>
     <string name="playstation">PlaySation</string>
 </resources>

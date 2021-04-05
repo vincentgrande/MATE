@@ -47,6 +47,11 @@ class NewMessageActivity : AppCompatActivity() {
             if (isChecked) fetchUsersSamePlateform()
             else fetchUsers()
         }
+        adapter.setOnItemLongClickListener { item, view ->
+            val uid = item as UserItem
+            ProfileDialog(uid.user.uid).show(supportFragmentManager, "MyCustomFragment")
+            return@setOnItemLongClickListener(true)
+        }
         fetchUsers()
     }
     val adapter = GroupAdapter<ViewHolder>()
@@ -56,7 +61,6 @@ class NewMessageActivity : AppCompatActivity() {
         ref.addListenerForSingleValueEvent(object:ValueEventListener{
             override fun onDataChange(p0: DataSnapshot) {
                 p0.children.forEach {
-                    Log.d("NewMessage",it.toString())
                     val user = it.getValue(User::class.java)
                     if (user != null){
                         if (user.uid != FirebaseAuth.getInstance().uid) {
@@ -84,7 +88,6 @@ class NewMessageActivity : AppCompatActivity() {
         ref.addListenerForSingleValueEvent(object:ValueEventListener{
             override fun onDataChange(p0: DataSnapshot) {
                 p0.children.forEach {
-                    Log.d("NewMessage",it.toString())
                     val user = it.getValue(User::class.java)
 
                     if (user != null ){

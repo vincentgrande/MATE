@@ -19,7 +19,6 @@ class UserItem(val user: User): Item<ViewHolder>(){
         var plateformList = arrayListOf<String>()
         plateform.forEach {
             val usedPlateform =  FirebaseDatabase.getInstance().getReference(("/plateform/$it"))
-            Log.d("test", usedPlateform.toString())
             usedPlateform.addValueEventListener(object: ValueEventListener {
                 override fun onCancelled(error: DatabaseError) {
                 }
