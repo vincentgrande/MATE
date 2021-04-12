@@ -35,7 +35,6 @@ class MyGamesActivity : AppCompatActivity() {
         setContentView(R.layout.activity_my_games)
         recyclerview_mygames.adapter = adapter
         button_done_myGames.setOnClickListener(){
-            refUsers.child("playedGames").setValue("$gameItems")
             val intent = Intent(this, LatestMessagesActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
@@ -51,8 +50,9 @@ class MyGamesActivity : AppCompatActivity() {
         refMyGames.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 var snap = snapshot.getValue(String::class.java) ?: return
+                Log.d("MyGamesActivity-snap", "$snap")
                 val gamesId = SettingsActivity.stringToList(snap ?: "")
-                Log.d("MyGamesActivity", "$gamesId")
+                Log.d("MyGamesActivity-id", "$gamesId")
                 var i = 0
                 gamesId.forEach {
                     var id = gamesId[i]

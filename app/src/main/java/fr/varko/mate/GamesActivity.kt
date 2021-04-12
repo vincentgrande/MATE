@@ -49,7 +49,7 @@ class GamesActivity : AppCompatActivity() {
                         var id:Long = gameItem.game?.id ?: 0
                         if (gameItems.contains(id)) {
                             gameItems.remove(id)
-                                //viewHolder.itemView.checkBoxGames.isChecked = true
+                            //viewHolder.itemView.checkBoxGames.isChecked = true
                         } else {
                             //imageView_game.setBackgroundResource(R.drawable.border)
                             gameItems.add(id)
