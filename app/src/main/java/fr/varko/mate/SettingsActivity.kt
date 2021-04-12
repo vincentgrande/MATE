@@ -66,12 +66,13 @@ class SettingsActivity : AppCompatActivity() {
         }
         ////
 
-        button_disconnect.setOnClickListener {
+        button_logout.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
             val intent = Intent(this,RegisterActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
         }
+
         profileImageUrl.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"

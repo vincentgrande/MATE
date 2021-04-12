@@ -23,6 +23,7 @@ import kotlinx.android.synthetic.main.bottom_menu.*
 import kotlinx.android.synthetic.main.first_top_menu.*
 import kotlinx.android.synthetic.main.latest_message_row.view.*
 import kotlinx.android.synthetic.main.profile_custom_dialog.*
+import kotlinx.android.synthetic.main.settings.*
 
 class LatestMessagesActivity : AppCompatActivity() {
     companion object{
@@ -52,6 +53,13 @@ class LatestMessagesActivity : AppCompatActivity() {
         //// onClickListener des boutons du menu haut
         button_settings.setOnClickListener {
             val intent = Intent(this,SettingsActivity::class.java)
+            startActivity(intent)
+        }
+
+        button_logout.setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
+            val intent = Intent(this,RegisterActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
         }
         ////
