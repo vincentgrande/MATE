@@ -45,7 +45,7 @@ class ProfileDialog(val uid:String): DialogFragment() {
                         override fun onDataChange(snapshot: DataSnapshot) {
                             var snap = snapshot.getValue(Plateform::class.java) ?: return
                             plateformList.add(snap.name)
-                            textview_plateform.text = " ${getString(R.string.plateform)} : ${plateformList.toString().replace("[","").replace("]", "")}"
+                            textview_plateform.text = "${getString(R.string.plateform)} : ${plateformList.toString().replace("[","").replace("]", "")}"
                         }
                     })
                 }
