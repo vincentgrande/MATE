@@ -53,9 +53,12 @@ class MyGamesActivity : AppCompatActivity() {
                 gamesId.forEach {
                     var id = gamesId[i]
                     val refGames = FirebaseDatabase.getInstance().getReference("/games/$id")
+                    Log.d("MyGamesActivity", "refGames : $refGames")
 
                     refGames.addListenerForSingleValueEvent(object : ValueEventListener {
                         override fun onDataChange(gameSnapshot: DataSnapshot) {
+                            if(gameSnapshot.child("id").value.toString() == "null") return
+                            else{
                             val gameId = id.toLong()
                             val gameName = gameSnapshot.child("name").getValue().toString()
                             val gameImg = gameSnapshot.child("img").getValue().toString()
@@ -66,8 +69,7 @@ class MyGamesActivity : AppCompatActivity() {
                                 val myGameItem = myGame as MyGamesItem
                                 var id:Long = myGameItem.game?.id ?: 0
 
-                            }
-                            Log.d("MyGamesActivity","$gameName")
+                            }}
                         }
 
                         override fun onCancelled(error: DatabaseError) {
