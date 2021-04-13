@@ -9,6 +9,7 @@ import com.squareup.picasso.Picasso
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
 import fr.varko.mate.SettingsActivity.Companion.stringToList
+import kotlinx.android.synthetic.main.latest_message_row.view.*
 import kotlinx.android.synthetic.main.plateform_row.view.*
 import kotlinx.android.synthetic.main.user_row_newmessage.view.*
 
@@ -17,6 +18,8 @@ class UserItem(val user: User): Item<ViewHolder>(){
         viewHolder.itemView.username_newmessage.text = user.username
         val plateform = stringToList(user.plateform)
         var plateformList = arrayListOf<String>()
+        val games = stringToList(user.playedGames)
+        var gamesList = arrayListOf<String>()
         plateform.forEach {
             val usedPlateform =  FirebaseDatabase.getInstance().getReference(("/plateform/$it"))
             usedPlateform.addValueEventListener(object: ValueEventListener {
@@ -26,6 +29,19 @@ class UserItem(val user: User): Item<ViewHolder>(){
                     var snap = snapshot.getValue(Plateform::class.java) ?: return
                     plateformList.add(snap.name)
                     viewHolder.itemView.plateform_newmessage.text = plateformList.toString().replace("[","").replace("]", "")
+                }
+            })
+        }
+        games.forEach{
+            val usedGames =  FirebaseDatabase.getInstance().getReference(("/games/$it"))
+            Log.d("UserItem", "$usedGames")
+            usedGames.addValueEventListener(object: ValueEventListener {
+                override fun onCancelled(error: DatabaseError) {
+                }
+                override fun onDataChange(snapshotGame: DataSnapshot) {
+                    val gameName = snapshotGame.child("name").getValue().toString()
+                    gamesList.add(gameName)
+                    viewHolder.itemView.textView_games.text = gamesList.toString().replace("[","").replace("]", "")
                 }
             })
         }

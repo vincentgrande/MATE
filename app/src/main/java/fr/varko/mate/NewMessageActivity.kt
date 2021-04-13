@@ -46,6 +46,7 @@ class NewMessageActivity : AppCompatActivity() {
         }
         checkBox_sameplateform.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) fetchUsersSamePlateform()
+            else if (isChecked) fetchUsersSameGames()
             else fetchUsers()
         }
         adapter.setOnItemLongClickListener { item, view ->
@@ -98,6 +99,45 @@ class NewMessageActivity : AppCompatActivity() {
                             val currentUser_plateform = stringToList(currentUser?.plateform ?: "")
                             currentUser_plateform.forEach {current ->
                                 mate_plateform.forEach{ mate ->
+                                    if(current == mate && user.uid !in mates){
+                                        mates.add(user.uid)
+                                        adapter.add(UserItem(user))
+                                    }
+                                }
+                            }
+                        }
+                        ////////
+                    }
+                    adapter.setOnItemClickListener { item, view ->
+                        val userItem = item as UserItem
+                        val intent = Intent(view.context, ChatLogActivity::class.java)
+                        intent.putExtra(USER_KEY,userItem.user)
+                        startActivity(intent)
+                        finish()
+                    }
+                }
+                recyclerview_newmessage.adapter = adapter
+            }
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
+    }
+    private fun fetchUsersSameGames(){
+        adapter.clear()
+        var mates = arrayListOf<String>()
+        val ref = FirebaseDatabase.getInstance().getReference("/users")
+        ref.addListenerForSingleValueEvent(object:ValueEventListener{
+            override fun onDataChange(p0: DataSnapshot) {
+                p0.children.forEach {
+                    val user = it.getValue(User::class.java)
+
+                    if (user != null ){
+                        if (user.uid != FirebaseAuth.getInstance().uid){
+                            ////////
+                            val mate_game = stringToList(user?.playedGames?: "")
+                            val currentUser_game = stringToList(currentUser?.playedGames ?: "")
+                            currentUser_game.forEach {current ->
+                                mate_game.forEach{ mate ->
                                     if(current == mate && user.uid !in mates){
                                         mates.add(user.uid)
                                         adapter.add(UserItem(user))

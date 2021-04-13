@@ -7,4 +7,5 @@ import kotlinx.android.parcel.Parcelize
 class Game (val id: Long, val name: String, val img: String, val isRankable: String, val isSelected: Boolean): Parcelable {
 
     constructor() : this(0,"","", "", false)
+
 }

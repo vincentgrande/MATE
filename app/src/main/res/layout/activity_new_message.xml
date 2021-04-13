@@ -61,4 +61,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
+    <CheckBox
+        android:id="@+id/checkBox_sameGames"
+        android:layout_width="189dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="11dp"
+        android:text="Same Games"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerview_newmessage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.533"
+        app:layout_constraintStart_toEndOf="@+id/checkBox_sameplateform"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintVertical_bias="1.0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

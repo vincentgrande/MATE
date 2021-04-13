@@ -34,11 +34,7 @@ class MyGamesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_games)
         recyclerview_mygames.adapter = adapter
-        button_done_myGames.setOnClickListener(){
-            val intent = Intent(this, LatestMessagesActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
-        }
+
         showMyGames()
 
     }
@@ -65,7 +61,12 @@ class MyGamesActivity : AppCompatActivity() {
                             val gameImg = gameSnapshot.child("img").getValue().toString()
                             val gameIsRankable = gameSnapshot.child("isRankable").getValue().toString()
                             val myGame = Game(gameId, gameName, gameImg, gameIsRankable, false)
-                            adapter.add(GameItem(myGame))
+                            adapter.add(MyGamesItem(myGame))
+                            adapter.setOnItemClickListener { myGame, view ->
+                                val myGameItem = myGame as MyGamesItem
+                                var id:Long = myGameItem.game?.id ?: 0
+
+                            }
                             Log.d("MyGamesActivity","$gameName")
                         }
 
