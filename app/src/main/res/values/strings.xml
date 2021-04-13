@@ -3,7 +3,7 @@
     <string name="success"> Connected successfully.</string>
     <string name="noaccount">Not having an account ?</string>
     <string name="connect">Let\'s MATE !</string>
-    <string name="slogan">slogan slogan slogan slogan.</string>
+    <string name="slogan">Searching friends until eight ? Let\'s try MATE !</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="selectnewmessage">Select a mate</string>
@@ -16,6 +16,6 @@
     <string name="plateform">Plateforms</string>
     <string name="computer">Computer</string>
     <string name="playstation">PlaySation</string>
-
+    <string name="sameplateform">Same plateform</string>
 
 </resources>

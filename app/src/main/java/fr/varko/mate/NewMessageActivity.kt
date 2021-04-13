@@ -27,6 +27,7 @@ class NewMessageActivity : AppCompatActivity() {
         setContentView(R.layout.activity_new_message)
         InternetCheck.isOnline(this)
         toptext.text = getString(R.string.selectnewmessage)
+        checkBox_sameplateform.text = getString(R.string.sameplateform)
         back_button.setOnClickListener{
             val intent = Intent(this,LatestMessagesActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)

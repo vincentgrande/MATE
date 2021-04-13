@@ -15,4 +15,6 @@
     <string name="plateform">Plateformes</string>
     <string name="computer">Ordinateur</string>
     <string name="playstation">PlaySation</string>
+    <string name="sameplateform">Mêmes plateformes</string>
+
 </resources>
