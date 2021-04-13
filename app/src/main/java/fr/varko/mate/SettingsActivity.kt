@@ -113,9 +113,7 @@ class SettingsActivity : AppCompatActivity() {
         val ref = FirebaseDatabase.getInstance().getReference("/users/${user.uid}")
         ref.addListenerForSingleValueEvent(object: ValueEventListener{
             override fun onCancelled(error: DatabaseError) {
-
             }
-
             override fun onDataChange(snapshot: DataSnapshot) {
                 val currentUser = snapshot.getValue(User::class.java)
                 edittextusername.setText(currentUser?.username)
