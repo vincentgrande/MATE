@@ -54,7 +54,6 @@ class LatestMessagesActivity : AppCompatActivity() {
             val intent = Intent(this,SettingsActivity::class.java)
             startActivity(intent)
         }
-
         button_logout.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
             val intent = Intent(this,RegisterActivity::class.java)
@@ -62,7 +61,6 @@ class LatestMessagesActivity : AppCompatActivity() {
             startActivity(intent)
         }
         ////
-
         adapter.setOnItemClickListener { item, view ->
             val intent = Intent(this, ChatLogActivity::class.java)
             val row = item as LatestMessageRow
@@ -76,7 +74,6 @@ class LatestMessagesActivity : AppCompatActivity() {
             ProfileDialog(uid).show(supportFragmentManager, "MyCustomFragment")
             return@setOnItemLongClickListener(true)
         }
-
         listenForLatestMessages()
         fetchCurrentuser()
         verifyUserIsLoggedIn()
