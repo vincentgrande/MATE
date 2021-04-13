@@ -18,5 +18,6 @@
     <string name="playstation">PlaySation</string>
     <string name="sameplateform">Same plateform</string>
     <string name="games">Games</string>
+    <string name="samegames">Same games</string>
 
 </resources>

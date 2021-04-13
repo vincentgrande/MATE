@@ -28,6 +28,7 @@ class NewMessageActivity : AppCompatActivity() {
         InternetCheck.isOnline(this)
         toptext.text = getString(R.string.selectnewmessage)
         checkBox_sameplateform.text = getString(R.string.sameplateform)
+        checkBox_sameGames.text = getString(R.string.samegames)
         back_button.setOnClickListener{
             val intent = Intent(this,LatestMessagesActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -45,9 +46,22 @@ class NewMessageActivity : AppCompatActivity() {
             startActivity(intent)
         }
         checkBox_sameplateform.setOnCheckedChangeListener { buttonView, isChecked ->
-            if (isChecked) fetchUsersSamePlateform()
-            else if (isChecked) fetchUsersSameGames()
-            else fetchUsers()
+            if (isChecked) {
+                fetchUsersSamePlateform()
+                checkBox_sameGames.isChecked = false
+            }
+            if( checkBox_sameGames.isChecked == false && checkBox_sameplateform.isChecked == false){
+                fetchUsers()
+            }
+        }
+        checkBox_sameGames.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
+                fetchUsersSameGames()
+                checkBox_sameplateform.isChecked = false
+            }
+             if( checkBox_sameGames.isChecked == false && checkBox_sameplateform.isChecked == false){
+                 fetchUsers()
+             }
         }
         adapter.setOnItemLongClickListener { item, view ->
             val uid = item as UserItem
