@@ -62,4 +62,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/edittext_description"
         app:layout_constraintTop_toBottomOf="@+id/edittext_description" />
+
+    <TextView
+        android:id="@+id/textview_games"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Games"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="@+id/textview_plateform"
+        app:layout_constraintStart_toStartOf="@+id/textview_plateform"
+        app:layout_constraintTop_toBottomOf="@+id/textview_plateform" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -24,7 +24,8 @@ class ProfileDialog(val uid:String): DialogFragment() {
     }
    
     override fun onStart() {
-
+        textview_games.text = "${getString(R.string.games)} : "
+        textview_plateform.text = "${getString(R.string.plateform)} : "
         val partner = FirebaseDatabase.getInstance().getReference("/users/$uid")
         var chatPartnerUser:User
         partner.addListenerForSingleValueEvent(object: ValueEventListener {
@@ -33,25 +34,44 @@ class ProfileDialog(val uid:String): DialogFragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 chatPartnerUser = snapshot.getValue(User::class.java)!!
                 Picasso.get().load(chatPartnerUser?.profileImageUrl).into(imageview_profile)
-                textview_username.text=chatPartnerUser?.username
+                textview_username.text = chatPartnerUser?.username
                 edittext_description.setText(chatPartnerUser?.description)
-                val plateform = SettingsActivity.stringToList(chatPartnerUser.plateform)
-                var plateformList = arrayListOf<String>()
-                plateform.forEach {
-                    val usedPlateform =  FirebaseDatabase.getInstance().getReference(("/plateform/$it"))
-                    usedPlateform.addValueEventListener(object: ValueEventListener {
-                        override fun onCancelled(error: DatabaseError) {
-                        }
-                        override fun onDataChange(snapshot: DataSnapshot) {
-                            var snap = snapshot.getValue(Plateform::class.java) ?: return
-                            plateformList.add(snap.name)
-                            textview_plateform.text = "${getString(R.string.plateform)} : ${plateformList.toString().replace("[","").replace("]", "")}"
-                        }
-                    })
+                if (chatPartnerUser.playedGames != "[]") {
+                    val games = SettingsActivity.stringToList(chatPartnerUser.playedGames)
+                    var gamesList = arrayListOf<String>()
+                    games.forEach {
+                        val UsedGames = FirebaseDatabase.getInstance().getReference(("/games/$it"))
+                        UsedGames.addValueEventListener(object : ValueEventListener {
+                            override fun onCancelled(error: DatabaseError) {
+                            }
+                            override fun onDataChange(snapshot: DataSnapshot) {
+                                var snap = snapshot.getValue(Game::class.java) ?: return
+                                gamesList.add(snap.name)
+                                textview_games.text = "${getString(R.string.games)} : ${gamesList.toString().replace("[", "").replace("]", "")}"
+                            }
+                        })
+                    }
+                }
+                if (chatPartnerUser.plateform != "[]") {
+                    val plateform = SettingsActivity.stringToList(chatPartnerUser.plateform)
+                    var plateformList = arrayListOf<String>()
+                    plateform.forEach {
+                        val usedPlateform = FirebaseDatabase.getInstance().getReference(("/plateform/$it"))
+                        usedPlateform.addValueEventListener(object : ValueEventListener {
+                            override fun onCancelled(error: DatabaseError) {
+                            }
+                            override fun onDataChange(snapshot: DataSnapshot) {
+                                var snap = snapshot.getValue(Plateform::class.java) ?: return
+                                if (snap != null) {
+                                    plateformList.add(snap.name)
+                                    textview_plateform.text = "${getString(R.string.plateform)} : ${plateformList.toString().replace("[", "").replace("]", "")}"
+                                }
+                            }
+                        })
+                    }
                 }
             }
         })
-
         super.onStart()
         val width = (resources.displayMetrics.widthPixels * 0.85).toInt()
         val height = (resources.displayMetrics.heightPixels * 0.40).toInt()
