@@ -22,7 +22,6 @@ class ProfileDialog(val uid:String): DialogFragment() {
         getDialog()!!.getWindow()?.setBackgroundDrawableResource(R.drawable.round_corner);
         return inflater.inflate(R.layout.profile_custom_dialog, container, false)
     }
-   
     override fun onStart() {
         textview_games.text = "${getString(R.string.games)} : "
         textview_plateform.text = "${getString(R.string.plateform)} : "
@@ -35,10 +34,8 @@ class ProfileDialog(val uid:String): DialogFragment() {
                 chatPartnerUser = snapshot.getValue(User::class.java)!!
                 Picasso.get().load(chatPartnerUser?.profileImageUrl).into(imageview_profile)
                 textview_username.text = chatPartnerUser?.username
-
                 if(chatPartnerUser?.description.equals(""))
                 else edittext_description.setText(chatPartnerUser?.description)
-
                 if (chatPartnerUser.playedGames.equals("[]") || chatPartnerUser.playedGames.equals(""))
                 else {
                     val games = SettingsActivity.stringToList(chatPartnerUser.playedGames)
@@ -82,5 +79,4 @@ class ProfileDialog(val uid:String): DialogFragment() {
         val height = (resources.displayMetrics.heightPixels * 0.40).toInt()
         dialog!!.window?.setLayout(width, ViewGroup.LayoutParams.WRAP_CONTENT)
     }
-
 }

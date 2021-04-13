@@ -24,7 +24,6 @@ class UserItem(val user: User): Item<ViewHolder>(){
                 usedPlateform.addValueEventListener(object : ValueEventListener {
                     override fun onCancelled(error: DatabaseError) {
                     }
-
                     override fun onDataChange(snapshot: DataSnapshot) {
                         var snap = snapshot.getValue(Plateform::class.java) ?: return
                         plateformList.add(snap.name)
@@ -42,7 +41,6 @@ class UserItem(val user: User): Item<ViewHolder>(){
                 usedGames.addValueEventListener(object : ValueEventListener {
                     override fun onCancelled(error: DatabaseError) {
                     }
-
                     override fun onDataChange(snapshotGame: DataSnapshot) {
                         val gameName = snapshotGame.child("name").getValue().toString()
                         gamesList.add(gameName)
