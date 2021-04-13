@@ -22,5 +22,6 @@
     <string name="games">Games</string>
     <string name="samegames">Same games</string>
     <string name="selectphoto">SELECT PHOTO</string>
+    <string name="managegames">Manage my games</string>
 
 </resources>

@@ -8,12 +8,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
-import fr.varko.mate.SettingsActivity.Companion.stringToList
-import kotlinx.android.synthetic.main.activity_games.*
 import kotlinx.android.synthetic.main.activity_my_games.*
-import kotlinx.android.synthetic.main.my_games_row.*
-import kotlinx.android.synthetic.main.plateform_row.view.*
-import kotlinx.android.synthetic.main.game_row.*
+import kotlinx.android.synthetic.main.bottom_menu.*
+import kotlinx.android.synthetic.main.first_top_menu.*
 
 class MyGamesActivity : AppCompatActivity() {
     private lateinit var database: FirebaseDatabase
@@ -34,9 +31,35 @@ class MyGamesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_games)
         recyclerview_mygames.adapter = adapter
-
+        manage_games.setText(R.string.managegames)
         showMyGames()
-
+        manage_games.setOnClickListener {
+            val intent = Intent(this,GamesActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+        }
+        ////  onClickListener des boutons du menu bas
+        button_lastmessage.setOnClickListener{
+            val intent = Intent(this,LatestMessagesActivity::class.java)
+            startActivity(intent)
+        }
+        button_newmessage.setOnClickListener {
+            val intent = Intent(this,NewMessageActivity::class.java)
+            startActivity(intent)
+        }
+        ////
+        //// onClickListener des boutons du menu haut
+        button_settings.setOnClickListener {
+            val intent = Intent(this,SettingsActivity::class.java)
+            startActivity(intent)
+        }
+        button_logout.setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
+            val intent = Intent(this,RegisterActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+        }
+        ////
     }
     val adapter = GroupAdapter<ViewHolder>()
 
