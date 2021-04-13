@@ -2,12 +2,14 @@
     <string name="app_name">MATE</string>
     <string name="success"> Connected successfully.</string>
     <string name="noaccount">Not having an account ?</string>
+    <string name="account">Already has an account ?</string>
     <string name="connect">Let\'s MATE !</string>
+    <string name="register">REGISTER</string>
     <string name="slogan">Searching friends until eight ? Let\'s try MATE !</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="selectnewmessage">Select a mate</string>
-    <string name="username">Nickname :</string>
+    <string name="username">Nickname </string>
     <string name="settings">-- My settings --</string>
     <string name="description">Description</string>
     <string name="save">Save</string>
@@ -19,5 +21,6 @@
     <string name="sameplateform">Same plateform</string>
     <string name="games">Games</string>
     <string name="samegames">Same games</string>
+    <string name="selectphoto">SELECT PHOTO</string>
 
 </resources>

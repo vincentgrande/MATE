@@ -3,10 +3,12 @@
     <string name="app_name">MATE</string>
     <string name="success">Connexion réussie.</string>
     <string name="noaccount">Pas encore de compte ?</string>
+    <string name="account">Vous avez déjà un compte ?</string>
+    <string name="register">S\'inscrire</string>
     <string name="email">Email</string>
     <string name="password">Mot de passe</string>
     <string name="selectnewmessage">Choisi un mate</string>
-    <string name="username">Pseudo :</string>
+    <string name="username">Pseudo </string>
     <string name="settings">-- Mes réglages --</string>
     <string name="description">Description</string>
     <string name="save">Enregister</string>
@@ -18,4 +20,6 @@
     <string name="sameplateform">Mêmes plateformes</string>
     <string name="games">Jeux</string>
     <string name="samegames">Mêmes jeux</string>
+    <string name="selectphoto">SELECTIONNER UNE PHOTO</string>
+
 </resources>

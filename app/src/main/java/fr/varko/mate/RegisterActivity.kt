@@ -24,6 +24,12 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         InternetCheck.isOnline(this)
         title="MATE Register"
+        already.setText(getString(R.string.account))
+        register.text = getString(R.string.register)
+        username_input.setHint(getString(R.string.username))
+        email_input.setHint(getString(R.string.email))
+        password_input.setHint(getString(R.string.password))
+        select.text = getString(R.string.selectphoto)
         register.setOnClickListener {
             register()
         }
