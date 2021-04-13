@@ -46,7 +46,6 @@ class LatestMessagesActivity : AppCompatActivity() {
         }
         button_newmessage.setOnClickListener {
             val intent = Intent(this,NewMessageActivity::class.java)
-            //val intent = Intent(this,GamesActivity::class.java)
             startActivity(intent)
         }
         ////

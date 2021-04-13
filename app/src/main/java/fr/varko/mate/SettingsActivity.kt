@@ -155,7 +155,6 @@ class SettingsActivity : AppCompatActivity() {
                 .addOnFailureListener {
                     Log.d("SettingsActivity", "Failed to save username : ${it.message}")
                 }
-        Toast.makeText(this,getString(R.string.modifsuccess), Toast.LENGTH_SHORT).show()
     }
     private fun savePhotoToFirebaseDatabase(){
         val filename = UUID.randomUUID().toString()

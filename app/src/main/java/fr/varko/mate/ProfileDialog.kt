@@ -35,8 +35,12 @@ class ProfileDialog(val uid:String): DialogFragment() {
                 chatPartnerUser = snapshot.getValue(User::class.java)!!
                 Picasso.get().load(chatPartnerUser?.profileImageUrl).into(imageview_profile)
                 textview_username.text = chatPartnerUser?.username
-                edittext_description.setText(chatPartnerUser?.description)
-                if (chatPartnerUser.playedGames != "[]") {
+
+                if(chatPartnerUser?.description.equals(""))
+                else edittext_description.setText(chatPartnerUser?.description)
+
+                if (chatPartnerUser.playedGames.equals("[]") || chatPartnerUser.playedGames.equals(""))
+                else {
                     val games = SettingsActivity.stringToList(chatPartnerUser.playedGames)
                     var gamesList = arrayListOf<String>()
                     games.forEach {
@@ -52,7 +56,8 @@ class ProfileDialog(val uid:String): DialogFragment() {
                         })
                     }
                 }
-                if (chatPartnerUser.plateform != "[]") {
+                if (chatPartnerUser.plateform.equals("[]") || chatPartnerUser.plateform.equals(""))
+                else {
                     val plateform = SettingsActivity.stringToList(chatPartnerUser.plateform)
                     var plateformList = arrayListOf<String>()
                     plateform.forEach {
