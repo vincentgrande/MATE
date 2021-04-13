@@ -17,6 +17,8 @@ import fr.varko.mate.SettingsActivity.Companion.stringToList
 import kotlinx.android.synthetic.main.activity_new_message.*
 import kotlinx.android.synthetic.main.bottom_menu.*
 import kotlinx.android.synthetic.main.second_top_menu.*
+import kotlinx.android.synthetic.main.user_row_newmessage.*
+import kotlinx.android.synthetic.main.user_row_newmessage.view.*
 
 class NewMessageActivity : AppCompatActivity() {
     companion object{

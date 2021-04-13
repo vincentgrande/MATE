@@ -61,8 +61,10 @@ class GamesActivity : AppCompatActivity() {
                             Log.d("GamesActivity", "LA $id")
 
                         }
+
                         Log.d("GamesActivity", "$gameItem")
                     }
+
                 }
             }
             override fun onCancelled(error: DatabaseError) {
