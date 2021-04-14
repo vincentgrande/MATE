@@ -17,8 +17,11 @@ import kotlinx.android.synthetic.main.game_row.view.*
 
 
 class GamesActivity : AppCompatActivity() {
+    companion object{
+        var gameItems = mutableSetOf<Long>()
+    }
     private lateinit var database: FirebaseDatabase
-    var gameItems = arrayListOf<Long>()
+
     private val uid = FirebaseAuth.getInstance().uid ?: ""
     val refUsers = FirebaseDatabase.getInstance().getReference(("/users/$uid"))
 
@@ -50,6 +53,7 @@ class GamesActivity : AppCompatActivity() {
                     adapter.setOnItemClickListener { game, view ->
                         val gameItem = game as GameItem
                         var id:Long = gameItem.game?.id ?: 0
+
                         if (gameItems.contains(id)) {
                             gameItems.remove(id)
                             view.checkBoxGames.isChecked = false

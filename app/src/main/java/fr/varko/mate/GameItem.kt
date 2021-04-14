@@ -9,6 +9,7 @@ import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
+import fr.varko.mate.GamesActivity.Companion.gameItems
 import fr.varko.mate.SettingsActivity.Companion.uid
 import kotlinx.android.synthetic.main.game_row.view.*
 import kotlinx.android.synthetic.main.latest_message_row.view.*
@@ -22,6 +23,14 @@ class GameItem(val game: Game?): Item<ViewHolder>() {
             targetImageView.setImageResource(R.drawable.ic_launcher_background)
         } else{
             Picasso.get().load(game!!.img).into(targetImageView);
+        }
+
+        viewHolder.itemView.checkBoxGames.setOnCheckedChangeListener { buttonView, isChecked ->
+            if(isChecked){
+                gameItems.add(game.id)
+            }else{
+                gameItems.remove(game.id)
+            }
         }
 
         val userGames = FirebaseDatabase.getInstance().getReference(("/users/$uid/playedGames"))
