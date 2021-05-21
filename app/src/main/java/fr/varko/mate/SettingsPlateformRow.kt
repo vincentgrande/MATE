@@ -13,7 +13,7 @@ import fr.varko.mate.SettingsActivity.Companion.stringToList
 import kotlinx.android.synthetic.main.plateform_row.view.*
 
 class SettingsPlateformRow (val plateform: Plateform): Item<ViewHolder>(){
-
+    val usedPlateform =  FirebaseDatabase.getInstance().getReference(("/users/${SettingsActivity.uid}/plateform/"))
     override fun bind(viewHolder: ViewHolder, position: Int) {
         viewHolder.itemView.checkBox_plateform.setText(plateform?.name.toString())
         viewHolder.itemView.checkBox_plateform.setOnCheckedChangeListener { buttonView, isChecked ->
@@ -30,7 +30,7 @@ class SettingsPlateformRow (val plateform: Plateform): Item<ViewHolder>(){
                 SettingsActivity.refUsers.child("plateform").setValue("$plateformList")
             }
         }
-        val usedPlateform =  FirebaseDatabase.getInstance().getReference(("/users/${SettingsActivity.uid}/plateform/"))
+
         usedPlateform.addValueEventListener(object: ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
             }

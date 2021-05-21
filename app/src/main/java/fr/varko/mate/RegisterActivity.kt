@@ -78,6 +78,8 @@ class RegisterActivity : AppCompatActivity() {
                     Toast.makeText(this,"${it.message}",Toast.LENGTH_SHORT).show()
                     Log.d("Main","Failed to create user : ${it.message}")
                 }
+                
+
     }
     private fun uploadImageToFirebaseStorage(){
         if (selectedPhotoUri == null) return  saveUserToFirebaseDatabase("https://firebasestorage.googleapis.com/v0/b/mate-1cb93.appspot.com/o/images_games%2Favatar.png?alt=media&token=181b9a00-997d-4801-b6f0-20b2c53b10c5")
